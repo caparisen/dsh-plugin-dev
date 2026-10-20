@@ -35,9 +35,9 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 export async function main(argv) {
   const options = parseOptions(argv)
   if (options.help) return
-  const cli = await resolveDsh({ explicit: options.dsh })
   const sourceName = options.from
   if (!sourceName) throw new CliError('shadow: pass --from <profile> (the profile to copy)')
+  const cli = await resolveDsh({ explicit: options.dsh })
   if (!isDirectory(join(profilesDir(), sourceName))) {
     throw new CliError(`shadow: no profile "${sourceName}" under ${profilesDir()}`)
   }

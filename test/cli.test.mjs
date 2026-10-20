@@ -36,8 +36,16 @@ test('an unknown command fails loudly', () => {
   assert.match(result.stderr, /unknown command/)
 })
 
-test('a missing required option fails with a usable message', () => {
-  const result = run(['shadow'])
-  assert.notEqual(result.status, 0)
-  assert.match(result.stderr, /--from/)
+test('argument errors come before launcher discovery', () => {
+  // A missing flag must be reported even where no `dsh` is installed: the
+  // argument is the caller's problem, the launcher is the machine's.
+  for (const [args, needle] of [
+    [['shadow'], /--from/],
+    [['compose'], /--profile/],
+  ]) {
+    const result = run(args)
+    assert.notEqual(result.status, 0)
+    assert.match(result.stderr, needle)
+    assert.doesNotMatch(result.stderr, /no usable `dsh` launcher/)
+  }
 })

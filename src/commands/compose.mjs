@@ -30,9 +30,9 @@ export const summary = 'compose a profile through the real launcher, diff it aga
 export async function main(argv) {
   const options = parseOptions(argv)
   if (options.help) return
-  const cli = await resolveDsh({ explicit: options.dsh })
   const profile = options.profile
   if (!profile) throw new CliError('compose: pass --profile <name>')
+  const cli = await resolveDsh({ explicit: options.dsh })
 
   const result = await composeProfile(cli, profile, { patches: options.patches, copy: options.copy })
 
