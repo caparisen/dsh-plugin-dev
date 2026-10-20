@@ -1,0 +1,8 @@
+# @citisen/dsh-plugin-dev — bundle layer.
+#
+# The whole contribution is one row: a skill provider that publishes the
+# bundled `dsh-plugin-dev` skill to the agent catalog. No service injection,
+# no transport, no patches to other rows.
+- insert:
+    - id: plugin-dev
+      name: '@citisen/dsh-plugin-dev'

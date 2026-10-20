@@ -1,0 +1,64 @@
+{
+  "name": "@citisen/dsh-plugin-dev",
+  "version": "0.1.0",
+  "description": "Development kit for DeepSeek Harness plugins: compose a profile, boot a throwaway shadow, verify the host half, capture the client half, and roll back a broken profile — driven by a bundled agent skill",
+  "type": "module",
+  "license": "MIT",
+  "author": "citisen",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caparisen/dsh-plugin-dev.git"
+  },
+  "homepage": "https://github.com/caparisen/dsh-plugin-dev#readme",
+  "bugs": {
+    "url": "https://github.com/caparisen/dsh-plugin-dev/issues"
+  },
+  "main": "src/index.js",
+  "bin": {
+    "dsh-plugin-dev": "bin/dsh-plugin-dev.mjs"
+  },
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "bin",
+    "src",
+    "skills",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.5"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/cordis": {
+      "optional": true
+    }
+  },
+  "keywords": [
+    "deepseek-harness",
+    "deepseek",
+    "dsh",
+    "dsh-plugin",
+    "dsh-bundle",
+    "plugin-development",
+    "devkit",
+    "agent-skill"
+  ]
+}

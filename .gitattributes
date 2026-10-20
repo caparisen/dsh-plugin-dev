@@ -1,0 +1,3 @@
+# Checked-out bytes must be identical on every platform: the tests compare
+# generated text, and CI runs on Linux while development happens on Windows.
+* text=auto eol=lf
