@@ -150,3 +150,25 @@ ignored. Installed packages are not scanned.
 
 **Do instead** Register a provider from the package (`ctx.skills.registerProvider`)
 as this package does, or place the bundle directly under a scanned root.
+
+## A just-published version is invisible to pnpm
+
+**Symptom** `npm view <pkg>` returns the version, but `pnpm install` (and
+`dsh plugin add`) fails with `ERR_PNPM_FETCH_404` — "is not in the npm registry".
+
+**Why** The registry serves two documents: the full packument and an abbreviated
+one (`Accept: application/vnd.npm.install-v1+json`) that installers request. For a
+newly published package the abbreviated document lags by a few minutes, and a
+missing document is reported as 404 — which reads like a permissions problem.
+
+**Do instead** Poll the abbreviated document instead of the full one:
+
+```sh
+curl -s -o /dev/null -w '%{http_code}\n' \
+  -H 'Accept: application/vnd.npm.install-v1+json' \
+  https://registry.npmjs.org/@scope%2Fname
+```
+
+Install once it answers 200. `npm view` and anonymous `curl` answering 200 prove
+nothing about whether pnpm can see the package.
+
